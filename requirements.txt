@@ -1,0 +1,4 @@
+kafka-python
+pandas
+pyspark
+mysql-connector-python
