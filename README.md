@@ -417,14 +417,4 @@ SELECT * FROM aqi_data LIMIT 5;
 
 ---
 
-# 👤 Author
 
-**Sumit Patil & Rohan Ghotane**
-
-**Project:** Real-Time AQI Monitoring and Analytics Using Big Data Technologies
-
----
-
-# 📄 License
-
-This project is intended for educational and learning purposes.
