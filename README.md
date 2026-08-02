@@ -48,28 +48,25 @@ AQI data is read from a CSV dataset, streamed through Kafka, processed in real t
 # 📂 Project Structure
 
 ```text
-AQI_Project/
-│
+.
+├── Dashboard
+│   └── AQI Monitoring Dashboard.pbix
 ├── Dockerfile
+├── README.md
+├── data
+│   └── AQI_dataset.csv
 ├── docker-compose.yml
+├── mysql
+│   └── create_table.sql
+├── producer
+│   └── kafka_producer.py
 ├── requirements.txt
-│
-├── dashboard/
-│   └── PowerBI.pbix
-│
-├── data/
-│   └── AQI_dataset.csv
-│
-├── mysql/
-│   └── create_table.sql
-│
-├── producer/
-│   └── kafka_producer.py
-│
-└── spark/
+└── spark
+    ├── jars
+    │   └── mysql-connector-j-9.0.0.jar
     ├── spark_streaming.py
-    └── jars/
-        └── mysql-connector-j-9.0.0.jar
+    └── start_consumer.sh
+
 ```
 
 ---
@@ -182,6 +179,9 @@ docker exec -it mysql mysql -u aqi_user -paqi_pass
 ```
 
 ```sql
+SOURCE /docker-entrypoint-initdb.d/create_table.sql;
+```
+```sql
 USE aqi_db;
 
 SHOW TABLES;
@@ -196,7 +196,26 @@ exit;
 ```
 
 ---
+# To create Kafka Topic
+```
+docker exec -it kafka bash
+```
 
+```
+/opt/kafka/bin/kafka-topics.sh \
+--create \
+--topic aqi-topic \
+--bootstrap-server localhost:9092 \
+--partitions 1 \
+--replication-factor 1
+
+```
+
+```
+/opt/kafka/bin/kafka-topics.sh \
+--list \
+--bootstrap-server localhost:9092
+```
 # ▶ Start Spark Streaming
 
 ```
@@ -272,7 +291,7 @@ SELECT COUNT(*) FROM aqi_data;
 Open
 
 ```
-dashboard/PowerBI.pbix
+dashboard/AQI Monitoring Dashboard.pbix
 ```
 
 Connect to MySQL using
