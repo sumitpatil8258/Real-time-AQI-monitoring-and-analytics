@@ -273,11 +273,11 @@ Batch 3
 # Verify Data in MySQL
 
 ```bash
-docker exec -it mysql mysql -u aqi_user -paqi_pass
+docker exec -it mysql mysql -u root -p
 ```
 
 ```sql
-USE aqi_db;
+USE aqi_monitoring;
 
 SELECT * FROM aqi_data LIMIT 10;
 
@@ -392,11 +392,11 @@ docker logs mysql --tail 50
 ## Verify MySQL records
 
 ```bash
-docker exec -it mysql mysql -u aqi_user -paqi_pass
+docker exec -it mysql mysql -u root -p 
 ```
 
 ```sql
-USE aqi_db;
+USE aqi_monitoring;
 
 SELECT COUNT(*) FROM aqi_data;
 
