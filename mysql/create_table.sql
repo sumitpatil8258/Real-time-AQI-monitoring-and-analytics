@@ -79,3 +79,14 @@ CREATE TABLE raw_aqi_data (
     Lattitude DECIMAL(10,7),
     Longitude DECIMAL(10,7)
 );
+DROP TABLE IF EXISTS producer_checkpoint;
+CREATE TABLE producer_checkpoint (
+    id INT NOT NULL,
+    last_row INT NOT NULL,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO producer_checkpoint (id, last_row)
+VALUES (1, 0);
